@@ -1,4 +1,4 @@
-import { Any } from "@react-spring/web";
+
 import {
   createContext,
   useState,
@@ -56,7 +56,6 @@ type TodoContextValue = {
   dateStyle: (todo: Todo) => string;
   removeTodo: (
     e: MouseEvent,
-
     todo: Todo
   ) => void;
   handleCheck: (e: MouseEvent, todo: Todo) => void;
@@ -72,7 +71,7 @@ type Filter = {
 
 export const TodoProvider = ({ children }: { children: ReactNode }) => {
   const [todos, setTodos] = useState(
-    JSON.parse(window.localStorage.getItem("todos")) || []
+    JSON.parse(window.localStorage.getItem("todos") || "[]") || []
   );
   const [sortType, setSortType] = useState("Default");
   const [filters, setFilters] = useState(generateFilters(todos));
@@ -192,13 +191,14 @@ export const TodoProvider = ({ children }: { children: ReactNode }) => {
       hour12: true
     });
   };
-  const removeTodo = (e: MouseEvent<HTMLButtonElement>, todo: Todo) => {
+  const removeTodo = (e: MouseEvent, todo: Todo) => {
+    e.preventDefault()
     const updatedTodos = todos.filter((t: Todo) => t.id !== todo.id);
     setTodos(updatedTodos);
     updateTodoStore(updatedTodos);
     navigate("/");
   };
-  const handleCheck = (e: MouseEvent<HTMLButtonElement>, todoOld: Todo) => {
+  const handleCheck = (e: MouseEvent, todoOld: Todo) => {
     e.preventDefault();
     interface DataElement extends Element {
       dataset: DOMStringMap;
@@ -232,7 +232,7 @@ export const TodoProvider = ({ children }: { children: ReactNode }) => {
     return todos.find((todo: Todo) => todo.id === id);
   };
 
-  const resetStatus = (e: MouseEvent<HTMLButtonElement>, todo: Todo) => {
+  const resetStatus = (e: MouseEvent, todo: Todo) => {
     e.preventDefault();
     const resetCheckListStatus = todo.checkList.map((item) => {
       item.isCompleted = false;
@@ -285,7 +285,7 @@ export const TodoProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const getTodoStore = () => {
-    setTodos(JSON.parse(window.localStorage.getItem("todos")));
+    setTodos(JSON.parse(window.localStorage.getItem("todos") || "[]") || []);
   };
 
   useEffect(() => {
