@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { FaRegEdit } from "react-icons/fa";
-import { useParams, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   width: 500px;
