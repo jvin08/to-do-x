@@ -10,9 +10,28 @@ import {
   linkStyle,
   arrowStyle
 } from "../components/Pages.styles";
+type Todo = {
+    id: string;
+    title: string;
+    isCompleted: boolean;
+    name: string;
+    priority: number;
+    complexity: number;
+    date: string;
+    time: string;
+    checkList: CheckItem[];
+    tags: string;
+    [key: string]: any;
+  };
+  
+  type CheckItem = {
+    id: string;
+    name: string;
+    isCompleted: boolean;
+  };
 
 const FormNewTodo: FC = () => {
-  const todo = undefined;
+  const todo = {};
   return (
     <Container>
       <Header>

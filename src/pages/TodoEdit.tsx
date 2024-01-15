@@ -26,6 +26,7 @@ type Todo = {
   time: string;
   checkList: CheckItem[];
   tags: string;
+  [key: string]: any;
 };
 type CheckItem = {
   id: string;
@@ -37,7 +38,6 @@ const TodoEdit: FC = () => {
   const { id } = useParams<Params>();
   const { getTodo } = useTodo();
   const todo = getTodo(id);
-
   return (
     <Container>
       <Header>

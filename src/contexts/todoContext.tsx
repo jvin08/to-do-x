@@ -28,6 +28,7 @@ type Todo = {
   priority: number;
   tags: string;
   checkList: CheckItem[];
+  [key: string]: any;
 };
 type CheckItem = {
   name: string;
@@ -40,7 +41,7 @@ type TodoContextValue = {
   filters: Filter[];
   search: string;
   powerMode: boolean;
-  getTodo(id: string): Todo | undefined;
+  getTodo(id: string): Todo;
   handlePowerMode(): Todo[] | undefined;
   generateFilters: (prevTodos: Todo[]) => Filter[];
   getFilteredTodos: (todosArr: Todo[]) => Todo[];
@@ -118,12 +119,11 @@ export const TodoProvider = ({ children }: { children: ReactNode }) => {
   const sortTodos = (todos: Todo[]) => {
     const nextTodos = [...todos];
     const [sortDirection, value] = sortType.split(" ");
-    console.log('nextTodos: ', nextTodos)
-    
+
     if (sortDirection === "Ascending") {
-        //e.g. a[value]==="a[date]"
-        
-      return nextTodos.sort((a, b) => toDate(a[value]) - toDate(b[value])); 
+      return nextTodos.sort((a, b) => {
+        return toDate(a[value]) - toDate(b[value])
+    }); 
     } else if (sortDirection === "Descending") {
       return nextTodos.sort((a, b) => toDate(b[value]) - toDate(a[value]));
     } else {
@@ -142,7 +142,7 @@ export const TodoProvider = ({ children }: { children: ReactNode }) => {
     checkList,
     isCompleted,
     percent
-  }) => {
+  }: Todo) => {
     const updatedTodo = {
       id,
       name,
@@ -234,7 +234,7 @@ export const TodoProvider = ({ children }: { children: ReactNode }) => {
       return Math.round(percent);
     }
   };
-  const getTodo = (id: string): Todo | undefined => {
+  const getTodo = (id: string): Todo  => {
     return todos.find((todo: Todo) => todo.id === id);
   };
 
