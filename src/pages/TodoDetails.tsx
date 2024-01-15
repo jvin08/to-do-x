@@ -10,7 +10,8 @@ import {
   linkStyle,
   arrowStyle,
   editLinkStyle,
-  StyledEditIcon
+  StyledEditIcon,
+  StyledLink
 } from "../components/Pages.styles";
 
 
@@ -35,8 +36,9 @@ type CheckItem = {
 
 function TodoDetails() {
   const { id } = useParams();
+  const todoID = id+''
   const { getTodo } = useTodo();
-  const todo = getTodo(id) as Todo | undefined;
+  const todo = getTodo(todoID) as Todo;
   if (!todo) return <div>No todo found</div>;
 
   return (
@@ -46,9 +48,9 @@ function TodoDetails() {
           <IoMdArrowBack style={arrowStyle} />
         </Link>
         <Title>Task Details</Title>
-        <Link to={`/todoEdit/${todo.id}`} style={editLinkStyle}>
+        <StyledLink to={`/todoEdit/${todo.id}`} >
           <StyledEditIcon />
-        </Link>
+        </StyledLink>
       </Header>
       <TodoTracker todo={todo} />
     </Container>

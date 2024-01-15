@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { FaRegEdit } from "react-icons/fa";
+import { useParams, Link } from "react-router-dom";
+
 const Container = styled.div`
   width: 500px;
   text-align: center;
@@ -38,6 +40,16 @@ const editLinkStyle = {
   height: "3rem",
   boxShadow: "0 0 6px lightgrey"
 };
+const StyledLink = styled(Link)`
+      position: relative;
+        text-decoration: none;
+        color: grey;
+        background: white;
+        border-radius: 50%;
+        width: 3rem;
+        height: 3rem;
+        box-shadow: 0 0 6px lightgrey;
+`
 const editIconStyle = {
   position: "absolute",
   top: "0.4rem",
@@ -62,5 +74,6 @@ export {
   linkStyle,
   arrowStyle,
   editLinkStyle,
-  editIconStyle
+  editIconStyle,
+  StyledLink
 };

@@ -15,29 +15,12 @@ import {
 type Params = {
   id: string;
 };
-type Todo = {
-  id: string;
-  title: string;
-  isCompleted: boolean;
-  name: string;
-  priority: number;
-  complexity: number;
-  date: string;
-  time: string;
-  checkList: CheckItem[];
-  tags: string;
-  [key: string]: any;
-};
-type CheckItem = {
-  id: string;
-  name: string;
-  isCompleted: boolean;
-};
 
 const TodoEdit: FC = () => {
   const { id } = useParams<Params>();
+  const todoID = id+''
   const { getTodo } = useTodo();
-  const todo = getTodo(id);
+  const todo = getTodo(todoID);
   return (
     <Container>
       <Header>

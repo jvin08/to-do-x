@@ -12,14 +12,18 @@ const to = (i: number) => ({
   rot: -10 + Math.random() * 20,
   delay: i * 100
 });
-const from = () => ({ x: 0, rot: 0, scale: 1.5, y: -1000 });
+const from = (i: number) =>  {
+    console.log('i', i)
+    return { x: 0, rot: 0, scale: 1.5, y: -1000 };
+}
+
 // This is being used down there in the view, it interpolates rotation and scale into a css transform
 const trans = (r: number, s: number) =>
   `perspective(1500px) rotateX(30deg) rotateY(${
     r / 10
   }deg) rotateZ(${r}deg) scale(${s})`;
 
-function Deck({ todos }) {
+function Deck({ todos }: { todos: Todo[] } = { todos: [] as Todo[] }) {
   const [gone] = useState(() => new Set()); // The set flags all the cards that are flicked out
   const [props, api] = useSprings(todos.length, (i) => ({
     ...to(i),
@@ -77,7 +81,7 @@ function Deck({ todos }) {
   );
 }
 
-export default function AnimatedTodos({ todos }) {
+export default function AnimatedTodos({ todos }: { todos: Todo[] } = { todos: [] as Todo[] }) {
   return (
     <div className={`flex fill center`}>
       <Deck todos={todos} />

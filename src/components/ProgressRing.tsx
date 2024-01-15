@@ -2,16 +2,28 @@ import { useState, useEffect } from "react";
 import { useTodo } from "../contexts/todoContext";
 
 type Todo = {
-  percent: Number;
-};
-type UseTodo = {
-  dueDateColor: (todo: Todo) => string;
-};
+    name: string;
+    isCompleted: boolean;
+    id: string;
+    percent: number;
+    complexity: number;
+    date: string;
+    time: string;
+    priority: number;
+    tags: string;
+    checkList: CheckItem[];
+    [key: string]: any;
+  };
+  type CheckItem = {
+    name: string;
+    id: string;
+    isCompleted: boolean;
+  };
 
 const ProgressRing = ({ todo }: { todo: Todo }) => {
-  const { dueDateColor } = useTodo() as UseTodo;
+  const { dueDateColor } = useTodo();
   const [offset, setOffset] = useState(100 - (todo.percent as number));
-  const [percent, setPercent] = useState(todo.percent);
+  const percent = todo.percent;
 
   const circumference = Math.PI * 2 * 27;
 

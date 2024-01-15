@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { IoMdArrowBack } from "react-icons/io";
 import TodoForm from "../components/TodoForm";
 import { FC } from "react";
@@ -10,28 +10,23 @@ import {
   linkStyle,
   arrowStyle
 } from "../components/Pages.styles";
-type Todo = {
-    id: string;
-    title: string;
-    isCompleted: boolean;
-    name: string;
-    priority: number;
-    complexity: number;
-    date: string;
-    time: string;
-    checkList: CheckItem[];
-    tags: string;
-    [key: string]: any;
-  };
-  
-  type CheckItem = {
-    id: string;
-    name: string;
-    isCompleted: boolean;
-  };
+import { uid } from "uid";
+
 
 const FormNewTodo: FC = () => {
-  const todo = {};
+  const todo  = {
+    name: '',
+    priority: 0,
+    complexity: 0,
+    date: new Date().toISOString().slice(0, 10),
+    time: '09:01',
+    checkList: [],
+    tags: '',
+    percent: 0,
+    isCompleted: false,
+    id: uid(6),
+  };
+
   return (
     <Container>
       <Header>
