@@ -1,6 +1,5 @@
 import { useTodo } from "../contexts/todoContext";
 import CustomButton from "./CustomButton";
-import { MouseEvent } from "react";
 import { FaRegTrashAlt, FaRedo } from "react-icons/fa";
 import {
   Container,
