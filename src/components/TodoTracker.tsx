@@ -28,27 +28,25 @@ import {
 import { FaRegCalendar, FaArrowUp, FaCheck } from "react-icons/fa";
 import { IoIosMove } from "react-icons/io";
 
-type Todo = {
-  name: string;
-  priority: number;
-  complexity: number;
-  percent: number;
-  checkList: CheckListItem[];
-};
 
-type CheckListItem = {
-  name: string;
-  id: string;
-  isCompleted: boolean;
-};
-type UseTodo = {
-  getLevelText: (level: number) => string;
-  handleCheck: (e: MouseEvent<HTMLDivElement>, todo: Todo) => void;
-  resetStatus: (e: MouseEvent<HTMLButtonElement>, todo: Todo) => void;
-  removeTodo: (e: MouseEvent<HTMLButtonElement>, todo: Todo) => void;
-  dueDateColor: (todo: Todo) => string;
-  dateStyle: (todo: Todo) => string;
-};
+type Todo = {
+    name: string;
+    priority: number;
+    complexity: number;
+    date: string;
+    time: string;
+    checkList: CheckItem[];
+    tags: string;
+    percent: number;
+    isCompleted: boolean;
+    id: string;
+  };
+  
+  type CheckItem = {
+    name: string;
+    id: string;
+    isCompleted: boolean;
+  };
 
 const TodoTracker = ({ todo }: { todo: Todo }) => {
   const {
@@ -58,7 +56,7 @@ const TodoTracker = ({ todo }: { todo: Todo }) => {
     removeTodo,
     dueDateColor,
     dateStyle
-  } = useTodo() as UseTodo;
+  } = useTodo();
   const nameToShow =
     todo.name.length > 30 ? todo.name.slice(0, 30) + "..." : todo.name;
   const priorityText = getLevelText(todo.priority);
