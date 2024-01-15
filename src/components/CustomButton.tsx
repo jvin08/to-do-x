@@ -45,7 +45,6 @@ const CustomButton = ({
   return (
     <Button
       onClick={handleClick}
-      onSubmit={handleSubmit}
       style={{
         color: color,
         background: background,

@@ -9,7 +9,6 @@ import {
   Header,
   linkStyle,
   arrowStyle,
-  editLinkStyle,
   StyledEditIcon,
   StyledLink
 } from "../components/Pages.styles";

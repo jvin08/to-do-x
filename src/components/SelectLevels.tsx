@@ -28,9 +28,7 @@ const Label = styled.label`
   width: 1.8rem;
   height: 1.8rem;
   padding-top: 0.35rem;
-  color: black;
   border-radius: 50%;
-  background: #ceebfd;
   cursor: pointer;
 `;
 const Input = styled.input`
@@ -41,7 +39,10 @@ const selected = {
   color: "white",
   background: "#3baff7"
 };
-
+const deSelectedStyle = {
+    color: "#000000",
+    background: "#ceebfd",
+}
 type Props = {
   name: string;
   eventHandler: (value: string) => void;
@@ -66,7 +67,7 @@ const SelectLevels = ({ name, eventHandler, currentLevel }: Props) => {
             <InputBox key={name + "_" + level}>
               <Label
                 htmlFor={name + "_" + level}
-                style={levelValue === level ? selected : null}
+                style={levelValue === level ? selected : deSelectedStyle}
               >
                 {level}
               </Label>
