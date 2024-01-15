@@ -36,7 +36,6 @@ const CustomButton = ({
   width,
   margin,
   marginTop,
-  handleSubmit,
   fontSize,
   padding,
   borderRadius,
