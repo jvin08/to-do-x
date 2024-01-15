@@ -35,17 +35,24 @@ import {
 } from "./Todo.styles";
 
 type Todo = {
-  id: string;
-  name: string;
-  priority: number;
-  complexity: number;
-  tags: string;
-  isCompleted: boolean;
-  percent: number;
-  date: string;
-  time: string;
-  checkList: object;
-};
+    name: string;
+    isCompleted: boolean;
+    id: string;
+    percent: number;
+    complexity: number;
+    date: string;
+    time: string;
+    priority: number;
+    tags: string;
+    checkList: CheckItem[];
+    [key: string]: any;
+  };
+  type CheckItem = {
+    name: string;
+    id: string;
+    isCompleted: boolean;
+  };
+
 type UseTodo = {
   completeTodo: (id: string | null) => void;
   getLevelText: (level: number) => string;
@@ -60,6 +67,7 @@ function Todo({ todo }: { todo: Todo }) {
     dueDateColor,
     dateStyle
   } = useTodo() as UseTodo;
+  
   const handleClick = (e: MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
     const commonAncestor = (e.target as HTMLDivElement).closest("[data-check]");

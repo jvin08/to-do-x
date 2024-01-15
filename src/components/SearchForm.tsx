@@ -1,4 +1,4 @@
-import { useState, FormEvent, MouseEvent } from "react";
+import { useState, FormEvent } from "react";
 import { useTodo } from "../contexts/todoContext";
 import styled from "styled-components";
 import { IoIosSearch } from "react-icons/io";
@@ -42,7 +42,7 @@ type UseTodo = {
 
 function SearchForm() {
   const [value, setValue] = useState("");
-  const { todos, handleSearch } = useTodo() as UseTodo;
+  const { handleSearch } = useTodo() as UseTodo;
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
