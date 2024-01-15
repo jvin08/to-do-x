@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo } from "react";
 import { useTodo } from "../contexts/todoContext";
 import styled from "styled-components";
 import SearchForm from "../components/SearchForm";

@@ -118,8 +118,12 @@ export const TodoProvider = ({ children }: { children: ReactNode }) => {
   const sortTodos = (todos: Todo[]) => {
     const nextTodos = [...todos];
     const [sortDirection, value] = sortType.split(" ");
+    console.log('nextTodos: ', nextTodos)
+    
     if (sortDirection === "Ascending") {
-      return nextTodos.sort((a, b) => toDate(a[value]) - toDate(b[value]));
+        //e.g. a[value]==="a[date]"
+        
+      return nextTodos.sort((a, b) => toDate(a[value]) - toDate(b[value])); 
     } else if (sortDirection === "Descending") {
       return nextTodos.sort((a, b) => toDate(b[value]) - toDate(a[value]));
     } else {
@@ -207,11 +211,13 @@ export const TodoProvider = ({ children }: { children: ReactNode }) => {
       "[data-check]"
     ) as DataElement;
     const checkId = commonAncestor.dataset.check;
-    const updatedTodo = updateTodoCheckList(todoOld, checkId);
-    updatedTodo.percent = calculatePercent(updatedTodo);
-    const updatedTodos = todos.filter((todo: Todo) => todo.id !== todoOld.id);
-    setTodos([...updatedTodos, updatedTodo]);
-    updateTodoStore([...updatedTodos, updatedTodo]);
+    if(checkId){
+        const updatedTodo = updateTodoCheckList(todoOld, checkId);
+        updatedTodo.percent = calculatePercent(updatedTodo);
+        const updatedTodos = todos.filter((todo: Todo) => todo.id !== todoOld.id);
+        setTodos([...updatedTodos, updatedTodo]);
+        updateTodoStore([...updatedTodos, updatedTodo]);
+    }
   };
 
   const calculatePercent = ({ checkList }: { checkList: CheckItem[] }) => {
@@ -268,7 +274,7 @@ export const TodoProvider = ({ children }: { children: ReactNode }) => {
     todos.length > 1 && setPowerMode((prev) => !prev);
   };
   const handlePowerMode = () => {
-    let firstTodo: Todo;
+    let firstTodo: Todo | undefined;
     let biggestScore = 0;
     todos.forEach((t: Todo) => {
       if (t.priority + t.complexity > biggestScore) {
@@ -276,7 +282,7 @@ export const TodoProvider = ({ children }: { children: ReactNode }) => {
         biggestScore = t.priority + t.complexity;
       }
     });
-    return [firstTodo];
+    return firstTodo ? [firstTodo] : [];
   };
 
   const updateTodoStore = (todos: Todo[]) => {

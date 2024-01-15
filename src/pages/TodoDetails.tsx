@@ -1,7 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { useTodo } from "../contexts/todoContext";
 import { IoMdArrowBack } from "react-icons/io";
-import { FaRegEdit } from "react-icons/fa";
+
 import TodoTracker from "../components/TodoTracker";
 import {
   Container,
@@ -13,9 +13,7 @@ import {
   StyledEditIcon
 } from "../components/Pages.styles";
 
-type Params = {
-  id: string;
-};
+
 type Todo = {
   id: string;
   title: string;
